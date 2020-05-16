@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const secret = require('../config/secrets');
+const secrets = require('../config/secrets');
 
 const router = require('express').Router();
 const db = require('../users/users-model');
@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
 
       res.status(200).json({
         message: `Welcom ${user.username}!`,
-        token: token
+        jwt_token: token
       });
     }else{
       res.status(401).json({message:'Invalid credentials'})
@@ -49,11 +49,11 @@ function generateToken(user){
     subject: user.id,
     username: user.username
   };
-  const secret = secret.jwtSecret;
-  const option ={
+  const secret = secrets.jwtSecret;
+  const options ={
     expiresIn: '15 min'
   };
-  return jwt.sign(payload,secrect,option)
+  return jwt.sign(payload,secret,options)
 };
 
 module.exports = router;
