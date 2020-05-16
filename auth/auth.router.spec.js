@@ -9,22 +9,26 @@ describe('server', () =>{
 });
 // Register endpoint tests
 describe('register', () =>{
-    it('should give status code 201 when successful register', () =>{
-        return request(server)
-        .post('/api/auth/register')
-        .send({username: 'cash', password:'myPassword'})
-        .then(response =>{
-            expect(response.status)
-            .toBe(201)
-        })
-    });
+    // it('should give status code 201 when successful register', () =>{
+    //     return request(server)
+    //     .post('/api/auth/register')
+    //     .send({username: 'cashl', password:'myPassword'})
+    //     .then(response =>{
+    //         expect(response.status)
+    //         .toBe(201)
+    //     })
+    // });
     it('should return a 500 on error registering new user', () =>{
         return request(server)
         .post('/api/auth/register')
-        .send({username:'thisUser', password:})
+        .send({username:'thisUser'})
         .then(response =>{
             expect(response.status)
-            .toBe(404)
+            .toBe(500)
         })
     });
 });
+
+describe('login', () =>{
+
+})
