@@ -30,5 +30,23 @@ describe('register', () =>{
 });
 
 describe('login', () =>{
+    it('should give status 401 error loggin in', () =>{
+        return request(server)
+        .post('/api/auth/login')
+        .send({username:'', password:''})
+        .then(res =>{
+            expect(res.status)
+            .toBe(401)
+        })
+    })
 
+    it('should return 200 for correct login', () =>{
+        return request(server)
+        .post('/api/auth/login')
+        .send({username:'cashl', password:'myPassword'})
+        .then(res =>{
+            expect(res.status)
+            .toBe(200)
+        })
+    })
 })
